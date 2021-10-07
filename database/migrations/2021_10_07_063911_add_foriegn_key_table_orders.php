@@ -13,9 +13,9 @@ class AddForiegnKeyTableOrders extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->foreign(['order_product_id'])->references(['order_id'])
-                ->on('order_products')->onDelete('CASCADE')->onUpdate('CASCADE');
+        Schema::table('user_orders', function (Blueprint $table) {
+            $table->foreign(['order_id'])->references(['id'])
+                ->on('orders')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 

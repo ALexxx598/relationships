@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForiegnKeyTableUsers extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddForiegnKeyTableUsers extends Migration
      */
     public function up()
     {
-        Schema::table('user_orders', function (Blueprint $table) {
-            $table->foreign(['user_id'])->references(['id'])
-                ->on('users')->onDelete('CASCADE')->onUpdate('NO ACTION');
+        Schema::create('orders', function (Blueprint $table) {
+            $table->bigIncrements('id',true)->index()->unique();
+            $table->unsignedBigInteger('product_id')->index();
+            $table->double('cashProduct')->nullable();
+            $table->timestamps();
 
         });
     }
@@ -27,6 +29,6 @@ class AddForiegnKeyTableUsers extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('orders');
     }
 }

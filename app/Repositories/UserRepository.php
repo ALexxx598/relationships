@@ -37,7 +37,7 @@ class UserRepository extends BaseRepository
     public function show($id)
     {
         $result = DB::select("SELECT `name`, `surname`, `email`, `number` FROM `users` WHERE `id` = :id", ['id'=>$id]);
-        $result = User::with('orders')->find($id);
+        $result = User::find($id);
         return $result;
     }
 }

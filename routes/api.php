@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,14 +18,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
 Route::group(['middleware' => 'auth'] , function (){
-        Route::group(['middleware' => 'role:admin'], function (){
-            Route::apiResources([
-                'user' => UserController::class,
-            ]);
+    Route::apiResources([
+        'user' => UserController::class,
+        'order' => OrderController::class,
+    ]);
+    Route::group(['middleware' => 'role:admin'], function (){
 
-        });
-        Route::group(['middleware' => 'role:user'], function (){
+    });
+    Route::group(['middleware' => 'role:user'], function (){
 
-        });
+    });
 });

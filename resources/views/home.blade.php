@@ -20,4 +20,11 @@
         </div>
     </div>
 </div>
+<form action="/api/order" method="POST">
+    @csrf
+    <div>
+        <input type="number" name="productId">
+        <input type="submit" value="Add">
+    </div>
+</form>
 @endsection
