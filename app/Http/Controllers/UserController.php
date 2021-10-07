@@ -2,10 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\NullDataException;
+use App\Http\Resources\UserDTO;
+use App\Http\Resources\UserResource;
+use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    public UserDto $userDto;
+
+    public UserService $userService;
+
+
+    public function __construct()
+    {
+        $this->userDto =  new UserDto();
+        $this->userService = new UserService();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +51,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-
+        $response = $this->userService->show(Auth::user()->getAuthIdentifier());
+        return UserResource::make($response);
     }
 
     /**

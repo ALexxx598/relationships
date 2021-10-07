@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7135ce4aa5b0fb82d8a4f8347853b3e",
+    "content-hash": "00255e0e66be9cf8b91896a917e207d2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -545,6 +545,61 @@
                 }
             ],
             "time": "2021-04-26T11:24:25+00:00"
+        },
+        {
+            "name": "getsolaris/laravel-make-service",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/getsolaris/laravel-make-service-command.git",
+                "reference": "5202ca9f69ab5fc34df4908b571a7eb69b480d5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/getsolaris/laravel-make-service-command/zipball/5202ca9f69ab5fc34df4908b571a7eb69b480d5b",
+                "reference": "5202ca9f69ab5fc34df4908b571a7eb69b480d5b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "~5.6.34|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
+                "illuminate/support": "~5.6.34|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
+                "php": "^7.1|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Getsolaris\\LaravelMakeService\\LaravelMakeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Getsolaris\\LaravelMakeService\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mingeun Kim",
+                    "email": "mingeun.k.k@gmail.com"
+                }
+            ],
+            "description": "A MVCS pattern create a service command for Laravel 5+",
+            "keywords": [
+                "contract",
+                "laravel",
+                "mvcs",
+                "pattern",
+                "service"
+            ],
+            "time": "2021-05-30T05:25:01+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -5615,6 +5670,52 @@
                 "test"
             ],
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "jason-guru/laravel-make-repository",
+            "version": "0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jason-guru/laravel-make-repository.git",
+                "reference": "693d3d189c0b19262a896eb888c3a7b870a2de43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jason-guru/laravel-make-repository/zipball/693d3d189c0b19262a896eb888c3a7b870a2de43",
+                "reference": "693d3d189c0b19262a896eb888c3a7b870a2de43",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JasonGuru\\LaravelMakeRepository\\RepositoryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JasonGuru\\LaravelMakeRepository\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "G Jason Sharma",
+                    "email": "g.jason.sharma@gmail.com"
+                }
+            ],
+            "description": "A simple package to create a make:repository command for Laravel 5+",
+            "time": "2020-10-24T13:21:42+00:00"
         },
         {
             "name": "laravel/sail",
