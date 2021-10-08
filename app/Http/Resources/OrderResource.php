@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
 {
+
     /**
      * Transform the resource into an array.
      *
@@ -14,9 +15,18 @@ class OrderResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
-            'time' => $this->name,
-            'products' =>$this->orderProducts,
+            'Order' => [
+                'time' => $this->created_at,
+                'product_id' =>$this->product_id,
+                'cash_of_order' => $this->cashProduct,
+            ],
+            'Product' => [
+                'product_name' => $this->name,
+                'product_price' => $this->price,
+                'product_size' => $this->size,
+            ],
         ];
     }
 }

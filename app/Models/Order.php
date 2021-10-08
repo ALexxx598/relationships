@@ -9,13 +9,14 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['pivot'];
+
     protected $fillable = [
         'product_id',
     ];
 
-    public function users()
+    public function products()
     {
-        //return $this->hasMany(UserOrder::class, 'user_id','id');
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(Products::class, 'product_id', 'product_id');
     }
 }

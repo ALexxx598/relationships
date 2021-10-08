@@ -24,9 +24,25 @@ class OrderRepository extends BaseRepository
     public function insert($dto)
     {
         $user = User::find($dto->id);
-        $user->orders()->create([
+        $result = $user->orders()->create([
             'product_id' => $dto->productId
         ]);
-        return true;
+        return $result;
+    }
+
+    public function show($user_id)
+    {
+        $user = User::find($user_id);
+        $orders = $user->orders()->select('orders.created_at','orders.product_id','orders.cashProduct','products.name', 'products.price', 'products.size')
+            ->join('products','orders.product_id','=','products.product_id')
+            ->get();
+        return $orders;
+    }
+
+    public function showWithProduct($product_id)
+    {
+        $order = Order::find(2);
+        $result = $order->products()->select("*")->get();
+        return $result;
     }
 }

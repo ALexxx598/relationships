@@ -6,8 +6,11 @@ namespace App\Http\Controllers;
 
 use App\Http\DTO\OrderDto;
 use App\Http\Requests\OrderRequest;
+use App\Http\Resources\OrderResource;
+use App\Http\Resources\ProductResource;
 use App\Services\OrderService;
 use App\Services\UserService;
+use Illuminate\Cache\RetrievesMultipleKeys;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -42,7 +45,7 @@ class OrderController extends Controller
     {
         $dto = $this->orderDto->transform($request);
         $response = $this->orderService->store($dto);
-        return $response;
+        return response()->json(OrderResource::make($response));
     }
 
     /**
@@ -53,7 +56,14 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return  1;
+        $response = $this->orderService->showWithProduct($id);
+        return response()->json($response);
+    }
+
+    public function showAllOrders()
+    {
+        $response = $this->orderService->showOrders(auth()->user()->getAuthIdentifier());
+        return OrderResource::collection($response);
     }
 
     /**
@@ -78,4 +88,5 @@ class OrderController extends Controller
     {
         return  2;
     }
+
 }

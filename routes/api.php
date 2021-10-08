@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'] , function (){
         'user' => UserController::class,
         'order' => OrderController::class,
     ]);
+    Route::get('/showAllOrders', [OrderController::class, 'showAllOrders']);
     Route::group(['middleware' => 'role:admin'], function (){
 
     });

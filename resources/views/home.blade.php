@@ -27,4 +27,16 @@
         <input type="submit" value="Add">
     </div>
 </form>
+<form action="/api/showAllOrders" method="GET">
+    @csrf
+    <div>
+        <input type="submit" value="ShowAllOrders">
+    </div>
+</form>
+<form action="/api/order/1" method="GET">
+    @csrf
+    <div>
+        <input type="submit" value="ShowWithProduct">
+    </div>
+</form>
 @endsection
