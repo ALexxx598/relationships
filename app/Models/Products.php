@@ -9,5 +9,9 @@ class Products extends Model
 {
     use HasFactory;
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'product_id','product_id')->select('id','cashProduct');
+    }
 
 }

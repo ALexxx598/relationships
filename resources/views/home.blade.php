@@ -39,4 +39,24 @@
         <input type="submit" value="ShowWithProduct">
     </div>
 </form>
+<form action="/api/showProductWithOrders/1" method="GET">
+    @csrf
+    <div>
+        <input type="submit" value="ShowProductWithOrders">
+    </div>
+</form>
+<form action="/api/order/3" method="POST">
+    @csrf
+    <div>
+        <input type="submit" value="DELETE">
+    </div>
+    @method('DELETE')
+</form>
+<form action="/api/product/2" method="POST">
+    @csrf
+    <div>
+        <input type="submit" value="DELETE">
+    </div>
+    @method('DELETE')
+</form>
 @endsection

@@ -2,29 +2,19 @@
 
 namespace App\Http\Controllers;
 
-
-
-use App\Http\DTO\OrderDto;
-use App\Http\Requests\OrderRequest;
-use App\Http\Resources\OrderResource;
 use App\Http\Resources\ProductResource;
-use App\Services\OrderService;
-use App\Services\UserService;
-use Illuminate\Cache\RetrievesMultipleKeys;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class ProductController extends Controller
 {
-
-    public OrderDto $orderDto;
-
-    public OrderService $orderService;
+    public ProductService $productService;
 
     public function __construct()
     {
-        $this->orderDto = new OrderDto();
-        $this->orderService = new OrderService();
+        $this->productService = new ProductService();
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +22,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return 4;
+        //
     }
 
     /**
@@ -41,11 +31,9 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OrderRequest $request)
+    public function store(Request $request)
     {
-        $dto = $this->orderDto->transform($request);
-        $response = $this->orderService->store($dto);
-        return response()->json(OrderResource::make($response));
+        //
     }
 
     /**
@@ -56,14 +44,13 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $response = $this->orderService->showWithProduct($id);
-        return response()->json($response);
+        //
     }
 
-    public function showAllOrders()
+    public function showProductWithOrders($id)
     {
-        $response = $this->orderService->showOrders(auth()->user()->getAuthIdentifier());
-        return OrderResource::collection($response);
+        $response = $this->productService->show($id);
+        return ProductResource::make($response);
     }
 
     /**
@@ -75,7 +62,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return  0;
+        //
     }
 
     /**
@@ -86,8 +73,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $response = $this->orderService->deleteOrder($id);
-        return response()->json($response);
+        $response = $this->productService->delete($id);
+        return $response ;
     }
-
 }

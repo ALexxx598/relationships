@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +24,9 @@ Route::group(['middleware' => 'auth'] , function (){
     Route::apiResources([
         'user' => UserController::class,
         'order' => OrderController::class,
+        'product' => ProductController::class,
     ]);
+    Route::get('/showProductWithOrders/{id}', [ProductController::class , 'showProductWithOrders']);
     Route::get('/showAllOrders', [OrderController::class, 'showAllOrders']);
     Route::group(['middleware' => 'role:admin'], function (){
 

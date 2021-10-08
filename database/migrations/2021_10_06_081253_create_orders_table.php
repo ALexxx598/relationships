@@ -17,6 +17,8 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id',true)->index()->unique();
             $table->unsignedBigInteger('product_id')->index();
             $table->double('cashProduct')->nullable();
+            $table->double('cashOrder')->nullable();
+            $table->integer('quantityProduct')->nullable();
             $table->timestamps();
 
         });

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
@@ -21,11 +22,12 @@ class OrderRepository extends BaseRepository
         return Order::class;
     }
 
-    public function insert($dto)
+    public function insert($dto, $price)
     {
         $user = User::find($dto->id);
         $result = $user->orders()->create([
-            'product_id' => $dto->productId
+            'cashProduct' => $price,
+            'product_id' => $dto->productId,
         ]);
         return $result;
     }
@@ -39,10 +41,22 @@ class OrderRepository extends BaseRepository
         return $orders;
     }
 
-    public function showWithProduct($product_id)
+    public function showWithProduct($id)
     {
-        $order = Order::find(2);
+        $order = Order::find($id);
         $result = $order->products()->select("*")->get();
         return $result;
+    }
+
+    public function destroy(int $id)
+    {
+        $result = DB::delete("DELETE FROM `orders` WHERE `id` = $id");
+        return $result;
+    }
+
+    public function getPriceById($productId)
+    {
+        $price = DB::select("SELECT `price` FROM `products` WHERE `product_id` = $productId");
+        return $price[0]->price;
     }
 }

@@ -23,7 +23,8 @@ class OrderService
 
     public function store($dto)
     {
-        $result = $this->orderRepository->insert($dto);
+        $price = $this->orderRepository->getPriceById($dto->productId);
+        $result = $this->orderRepository->insert($dto, $price);
         return $result;
     }
 
@@ -33,9 +34,16 @@ class OrderService
         return $result;
     }
 
-    public function showWithProduct($product_id)
+    public function showWithProduct($id)
     {
-        $result = $this->orderRepository->showWithProduct($product_id);
+        $result = $this->orderRepository->showWithProduct($id);
         return $result;
     }
+
+    public function deleteOrder(int $id)
+    {
+        $result = $this->orderRepository->destroy($id);
+        return $result;
+    }
+
 }
