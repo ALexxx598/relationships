@@ -15,9 +15,10 @@ class OrderService
 {
     public OrderRepository $orderRepository;
 
-    public function __construct()
+    public function __construct(?OrderRepository $orderRepository)
     {
-        $this->orderRepository = new OrderRepository();
+        if($orderRepository!==null){ $this->orderRepository = $orderRepository;}
+        else{ $this->orderRepository = new OrderRepository();}
     }
 
     public function store($dto)

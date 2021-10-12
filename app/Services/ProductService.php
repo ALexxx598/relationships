@@ -14,9 +14,10 @@ class ProductService
 {
     public ProductRepository $productrepo;
 
-    public function __construct()
+    public function __construct(?ProductRepository $productRepository)
     {
-        $this->productrepo = new ProductRepository();
+        if($productRepository==null){ $this->productrepo = new ProductRepository();}
+        else {$this->productrepo = $productRepository;}
     }
 
     public function show($id)

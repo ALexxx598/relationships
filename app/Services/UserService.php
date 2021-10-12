@@ -13,11 +13,14 @@ class UserService
 {
     public UserRepository $userRepository;
 
-    public function __construct()
+    public function __construct(?UserRepository $userRepository = null)
     {
-        $this->userRepository = new UserRepository();
+        if($userRepository==null) {
+            $this->userRepository = new UserRepository();
+        }else{
+            $this->userRepository = $userRepository;
+        }
     }
-
 
     public function store(UserDto $userDto)
     {
