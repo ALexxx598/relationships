@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\NotStoreException;
+use App\Exceptions\NotUpdateException;
+use App\Http\DTO\ProductDTO;
+use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -10,41 +14,36 @@ class ProductController extends Controller
 {
     public ProductService $productService;
 
+    public ProductDTO $productDTO;
+
     public function __construct()
     {
         $this->productService = new ProductService();
+        $this->productDTO =  new ProductDTO();
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
+    {
+        $dto = $this->productDTO->transform($request);
+        $result = $this->productService->store($dto);
+        if(!$result){ throw new NotStoreException;}
+        return response()->json($result);
+    }
+
+    public function show($id)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function showAll(?int $perPage = 10)
     {
-        //
+        $response = $this->productService->showAll($perPage);
+        return response()->json($response);
     }
 
     public function showProductWithOrders($id)
@@ -53,24 +52,14 @@ class ProductController extends Controller
         return ProductResource::make($response);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $dto = $this->productDTO->transform($request);
+        $result = $this->productService->update($dto);
+        if(!$result){ throw new NotUpdateException;}
+        return response()->json($result);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $response = $this->productService->delete($id);

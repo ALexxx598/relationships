@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->double('cashProduct')->nullable();
             $table->double('cashOrder')->nullable();
             $table->integer('quantityProduct')->nullable();
+            $table->string('status')->nullable()->default("delivering");
             $table->timestamps();
 
         });

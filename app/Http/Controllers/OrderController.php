@@ -25,35 +25,18 @@ class OrderController extends Controller
         $this->orderDto = new OrderDto();
         $this->orderService = new OrderService();
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return 4;
+        return 0;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(OrderRequest $request)
     {
         $dto = $this->orderDto->transform($request);
         $response = $this->orderService->store($dto);
         return response()->json(OrderResource::make($response));
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $response = $this->orderService->showWithProduct($id);
@@ -66,24 +49,11 @@ class OrderController extends Controller
         return OrderResource::collection($response);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         return  0;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $response = $this->orderService->deleteOrder($id);

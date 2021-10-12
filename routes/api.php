@@ -26,10 +26,12 @@ Route::group(['middleware' => 'auth'] , function (){
         'order' => OrderController::class,
         'product' => ProductController::class,
     ]);
+    Route::post('/showAll/{$perPage}', [ProductController::class , 'showAll']);
     Route::get('/showProductWithOrders/{id}', [ProductController::class , 'showProductWithOrders']);
     Route::get('/showAllOrders', [OrderController::class, 'showAllOrders']);
     Route::group(['middleware' => 'role:admin'], function (){
-
+        Route::post('/product', [ProductController::class , 'store']);
+        Route::put('/product/{id}', [ProductController::class , 'update']);
     });
     Route::group(['middleware' => 'role:user'], function (){
 

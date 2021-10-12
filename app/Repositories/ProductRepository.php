@@ -32,4 +32,34 @@ class ProductRepository extends BaseRepository
         $result = DB::delete("DELETE FROM `products` WHERE `product_id` = $id");
         return $result;
     }
+
+    public function insert($dto)
+    {
+        $result = DB::table('products')->insert([
+            'name' => $dto->name,
+            'price' => $dto->price,
+            'color' => $dto->color,
+            'size' => $dto->size,
+            'factory_identity' => $dto->factoryIdentity,
+        ]);
+        return $result;
+    }
+
+    public function updateproduct($dto)
+    {
+        $result = DB::table('products')->where('id','=', $dto->id)->update([
+            'name' => $dto->name,
+            'price' => $dto->price,
+            'color' => $dto->color,
+            'size' => $dto->size,
+            'factory_identity' => $dto->factoryIdentity,
+        ]);
+        return $result;
+    }
+
+    public function showAll($perPage)
+    {
+        $result = DB::table('products')->select('*')->paginate($perPage);
+        return $result;
+    }
 }

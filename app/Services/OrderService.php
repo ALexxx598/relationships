@@ -20,7 +20,6 @@ class OrderService
         $this->orderRepository = new OrderRepository();
     }
 
-
     public function store($dto)
     {
         $price = $this->orderRepository->getPriceById($dto->productId);
