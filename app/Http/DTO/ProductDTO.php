@@ -14,11 +14,11 @@ class ProductDTO
 
     public ?string $color;
 
-    public ?string $size;
+    public ?string $size = null;
 
-    public ?double $price;
+    public ?float $price;
 
-    public ?double $factoryIdentity;
+    public ?float $factoryIdentity = null;
 
     public function transform($request ,?int $id = null)
     {

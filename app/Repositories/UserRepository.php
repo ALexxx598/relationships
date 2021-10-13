@@ -23,8 +23,11 @@ class UserRepository extends BaseRepository
     }
     public function update(UserDto $userDto)
     {
-        $result = DB::update("UPDATE `users` SET `name`= $userDto->name, `surname` = $userDto->surname,
-                   `number` = $userDto->number, `email` = $userDto->email WHERE `id` = :id", ['id' => $userDto->id]);
+        $result = DB::table('users')->where('id','=',$userDto->id)->update([
+            'email' => $userDto->email,
+            'name' => $userDto->name,
+            'surname' => $userDto->surname,
+        ]);
         return $result;
     }
 
